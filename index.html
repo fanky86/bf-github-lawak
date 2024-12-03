@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Callback</title>
+</head>
+<body>
+    <h1>Facebook Callback</h1>
+    <p>Processing...</p>
+    <script>
+        // Mendapatkan access_token dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const accessToken = urlParams.get('access_token');
+
+        if (accessToken) {
+            // Menampilkan access_token di halaman
+            document.body.innerHTML += `<p>Access Token: ${accessToken}</p>`;
+            console.log('Access Token:', accessToken);
+        } else {
+            console.log('Access token tidak ditemukan.');
+            document.body.innerHTML += `<p>Access token tidak ditemukan.</p>`;
+        }
+    </script>
+</body>
+</html>
