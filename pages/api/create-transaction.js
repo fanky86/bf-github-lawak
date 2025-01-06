@@ -32,8 +32,9 @@ export default async function handler(req, res) {
       // Kirim token transaksi ke frontend untuk diproses
       res.status(200).json({ token: transactionToken.token });
     } catch (error) {
+      // Menampilkan detail error untuk membantu debugging
       console.error("Gagal membuat transaksi:", error);
-      res.status(500).json({ error: "Gagal membuat transaksi." });
+      res.status(500).json({ error: `Gagal membuat transaksi: ${error.message}` });
     }
   } else {
     // Mengatur method yang diizinkan
