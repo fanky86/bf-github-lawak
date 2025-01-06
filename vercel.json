@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "routes": [
-    {
-      "src": "/callback",
-      "dest": "/index.js"
-    }
+  "builds": [
+    { "src": "pages/**/*.js", "use": "@vercel/node" },
+    { "src": "pages/api/*.js", "use": "@vercel/node" }
   ]
 }
