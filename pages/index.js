@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", amount: "" });
@@ -18,7 +18,6 @@ export default function Home() {
 
     const result = await response.json();
     if (result.token) {
-      // Redirect to Midtrans payment page
       window.snap.pay(result.token, {
         onSuccess: function () {
           window.location.href = "/success";
@@ -34,6 +33,14 @@ export default function Home() {
       alert("Gagal membuat transaksi.");
     }
   };
+
+  useEffect(() => {
+    // Tambahkan script Midtrans Snap Client
+    const script = document.createElement("script");
+    script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+    script.setAttribute("data-client-key", "CLIENT_KEY_ANDA");
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
