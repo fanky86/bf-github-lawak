@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", amount: "" });
 
+  // Menangani perubahan input
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Menangani submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,16 +19,17 @@ export default function Home() {
     });
 
     const result = await response.json();
+
     if (result.token) {
       window.snap.pay(result.token, {
         onSuccess: function () {
           window.location.href = "/success";
         },
         onPending: function () {
-          alert("Menunggu pembayaran.");
+          alert("Pembayaran sedang diproses.");
         },
         onError: function () {
-          alert("Terjadi kesalahan, coba lagi.");
+          alert("Terjadi kesalahan. Coba lagi.");
         },
       });
     } else {
@@ -34,11 +37,11 @@ export default function Home() {
     }
   };
 
+  // Menambahkan script Snap Midtrans
   useEffect(() => {
-    // Tambahkan script Midtrans Snap Client
     const script = document.createElement("script");
     script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
-    script.setAttribute("data-client-key", "CLIENT_KEY_ANDA");
+    script.setAttribute("data-client-key", process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY);
     document.body.appendChild(script);
   }, []);
 
@@ -46,7 +49,7 @@ export default function Home() {
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1>Pembayaran</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>Nama:</label>
           <input
             type="text"
@@ -54,9 +57,10 @@ export default function Home() {
             value={formData.name}
             onChange={handleChange}
             required
+            style={{ marginLeft: "10px" }}
           />
         </div>
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label>Jumlah (Rp):</label>
           <input
             type="number"
@@ -64,9 +68,12 @@ export default function Home() {
             value={formData.amount}
             onChange={handleChange}
             required
+            style={{ marginLeft: "10px" }}
           />
         </div>
-        <button type="submit">Bayar</button>
+        <button type="submit" style={{ padding: "5px 10px" }}>
+          Bayar
+        </button>
       </form>
     </div>
   );
