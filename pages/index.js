@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "./Home.module.css"; // Import CSS module untuk styling
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", amount: "" });
@@ -46,32 +47,32 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Pembayaran</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "10px" }}>
-          <label>Nama:</label>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Pembayaran</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Nama:</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            style={{ marginLeft: "10px" }}
+            className={styles.input}
           />
         </div>
-        <div style={{ marginBottom: "10px" }}>
-          <label>Jumlah (Rp):</label>
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Jumlah (Rp):</label>
           <input
             type="number"
             name="amount"
             value={formData.amount}
             onChange={handleChange}
             required
-            style={{ marginLeft: "10px" }}
+            className={styles.input}
           />
         </div>
-        <button type="submit" style={{ padding: "5px 10px" }}>
+        <button type="submit" className={styles.submitButton}>
           Bayar
         </button>
       </form>
