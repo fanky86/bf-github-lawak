@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     // Konfigurasi Midtrans
     const snap = new midtransClient.Snap({
-      isProduction: false, // Ganti ke `true` untuk mode produksi
+      isProduction: false, // Ganti ke true untuk mode produksi
       serverKey: "SERVER_KEY_ANDA", // Ganti dengan Server Key Anda
     });
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       },
       customer_details: {
         first_name: name,
-        email: "user@example.com", // Tambahkan email pengguna
+        email: "user@example.com", // Email pengguna (dapat dimodifikasi)
       },
     };
 
