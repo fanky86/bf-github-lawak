@@ -2,36 +2,41 @@ const midtransClient = require("midtrans-client");
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { name, amount } = req.body;
+    const { name, amount, email } = req.body;
 
-    if (!name || amount <= 0) {
+    // Validasi data
+    if (!name || !amount || amount <= 0 || !email) {
       return res.status(400).json({ error: "Data tidak valid." });
     }
 
     // Konfigurasi Midtrans
     const snap = new midtransClient.Snap({
       isProduction: false, // Ganti ke true untuk mode produksi
-      serverKey: "SERVER_KEY_ANDA", // Ganti dengan Server Key Anda
+      serverKey: process.env.MIDTRANS_SERVER_KEY, // Gantilah dengan Server Key Anda
     });
 
     const transaction = {
       transaction_details: {
-        order_id: `ORDER-${Date.now()}`,
-        gross_amount: parseInt(amount),
+        order_id: `ORDER-${Date.now()}`, // ID pesanan unik
+        gross_amount: parseInt(amount), // Jumlah pembayaran
       },
       customer_details: {
-        first_name: name,
-        email: "user@example.com", // Email pengguna (dapat dimodifikasi)
+        first_name: name, // Nama pengguna
+        email: email, // Email pengguna yang dikirim dari frontend
       },
     };
 
     try {
+      // Membuat transaksi dengan Midtrans
       const transactionToken = await snap.createTransaction(transaction);
+      // Kirim token transaksi ke frontend untuk diproses
       res.status(200).json({ token: transactionToken.token });
     } catch (error) {
+      console.error("Gagal membuat transaksi:", error);
       res.status(500).json({ error: "Gagal membuat transaksi." });
     }
   } else {
+    // Mengatur method yang diizinkan
     res.setHeader("Allow", ["POST"]);
     res.status(405).end(`Metode ${req.method} tidak diizinkan.`);
   }
