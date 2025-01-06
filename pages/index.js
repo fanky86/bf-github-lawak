@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import styles from "./Home.module.css"; // Import CSS module untuk styling
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: "", amount: "" });
@@ -46,33 +45,88 @@ export default function Home() {
     document.body.appendChild(script);
   }, []);
 
+  // CSS inline dalam objek
+  const styles = {
+    container: {
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      background: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
+      color: "#fff",
+      minHeight: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      textAlign: "center",
+      padding: "20px",
+    },
+    heading: {
+      fontSize: "36px",
+      marginBottom: "30px",
+      animation: "fadeIn 1s ease-out",
+    },
+    form: {
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      padding: "30px",
+      borderRadius: "10px",
+      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+      animation: "slideIn 0.8s ease-out",
+    },
+    inputGroup: {
+      marginBottom: "15px",
+    },
+    label: {
+      display: "block",
+      fontSize: "16px",
+      marginBottom: "5px",
+    },
+    input: {
+      width: "100%",
+      padding: "10px",
+      border: "none",
+      borderRadius: "5px",
+      fontSize: "16px",
+      boxSizing: "border-box",
+      transition: "background-color 0.3s",
+    },
+    submitButton: {
+      padding: "10px 20px",
+      backgroundColor: "#2575fc",
+      color: "#fff",
+      border: "none",
+      borderRadius: "5px",
+      fontSize: "18px",
+      cursor: "pointer",
+      transition: "background-color 0.3s",
+    },
+  };
+
   return (
-    <div className={styles.container}>
-      <h1 className={styles.heading}>Pembayaran</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Nama:</label>
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Pembayaran</h1>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Nama:</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className={styles.input}
+            style={styles.input}
           />
         </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Jumlah (Rp):</label>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Jumlah (Rp):</label>
           <input
             type="number"
             name="amount"
             value={formData.amount}
             onChange={handleChange}
             required
-            className={styles.input}
+            style={styles.input}
           />
         </div>
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" style={styles.submitButton}>
           Bayar
         </button>
       </form>
