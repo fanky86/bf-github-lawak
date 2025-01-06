@@ -9,16 +9,29 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/payment", {
+
+    const response = await fetch("/api/create-transaction", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
+
     const result = await response.json();
-    if (result.success) {
-      window.location.href = "/success";
+    if (result.token) {
+      // Redirect to Midtrans payment page
+      window.snap.pay(result.token, {
+        onSuccess: function () {
+          window.location.href = "/success";
+        },
+        onPending: function () {
+          alert("Menunggu pembayaran.");
+        },
+        onError: function () {
+          alert("Terjadi kesalahan, coba lagi.");
+        },
+      });
     } else {
-      alert("Pembayaran gagal, coba lagi.");
+      alert("Gagal membuat transaksi.");
     }
   };
 
