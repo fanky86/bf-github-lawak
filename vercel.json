@@ -2,26 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "pages/api/**/*.js",
+      "src": "package.json",
       "use": "@vercel/node"
-    },
-    {
-      "src": "pages/**/*.js",
-      "use": "@vercel/next"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "/api/charge",
+      "dest": "/api/charge.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/public/index.html"
     }
-  ],
-  "env": {
-    "NEXT_PUBLIC_MIDTRANS_CLIENT_KEY": "YOUR_CLIENT_KEY",
-    "MIDTRANS_SERVER_KEY": "YOUR_SERVER_KEY"
-  }
+  ]
 }
