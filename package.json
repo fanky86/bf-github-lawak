@@ -7,7 +7,7 @@
     "start": "vercel start"
   },
   "dependencies": {
-    "midtrans-client": "^2.2.0",
+    "midtrans-client": "1.4.2",
     "express": "^4.17.1"
   }
 }
