@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [formData, setFormData] = useState({ name: "", amount: "" });
+  const [formData, setFormData] = useState({ name: "", amount: "", email: "" });
 
   // Menangani perubahan input
   const handleChange = (e) => {
@@ -45,91 +45,77 @@ export default function Home() {
     document.body.appendChild(script);
   }, []);
 
-  // CSS inline dalam objek
-  const styles = {
-    container: {
-      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      background: "linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)",
-      color: "#fff",
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      textAlign: "center",
-      padding: "20px",
-    },
-    heading: {
-      fontSize: "36px",
-      marginBottom: "30px",
-      animation: "fadeIn 1s ease-out",
-    },
-    form: {
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
-      padding: "30px",
-      borderRadius: "10px",
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-      animation: "slideIn 0.8s ease-out",
-    },
-    inputGroup: {
-      marginBottom: "15px",
-    },
-    label: {
-      display: "block",
-      fontSize: "16px",
-      marginBottom: "5px",
-    },
-    input: {
-      width: "100%",
-      padding: "10px",
-      border: "none",
-      borderRadius: "5px",
-      fontSize: "16px",
-      boxSizing: "border-box",
-      transition: "background-color 0.3s",
-    },
-    submitButton: {
-      padding: "10px 20px",
-      backgroundColor: "#2575fc",
-      color: "#fff",
-      border: "none",
-      borderRadius: "5px",
-      fontSize: "18px",
-      cursor: "pointer",
-      transition: "background-color 0.3s",
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>Pembayaran</h1>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Nama:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Jumlah (Rp):</label>
-          <input
-            type="number"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.submitButton}>
-          Bayar
-        </button>
-      </form>
-    </div>
+    <html lang="id">
+      <head>
+        <title>Halaman Pembayaran</title>
+      </head>
+      <body style={{ fontFamily: "Arial, sans-serif", backgroundColor: "#f4f4f9", margin: "0" }}>
+        <header style={{ textAlign: "center", padding: "20px", backgroundColor: "#6200ea", color: "white" }}>
+          <h1>Formulir Pembayaran</h1>
+        </header>
+        <main style={{ maxWidth: "600px", margin: "50px auto", padding: "20px", backgroundColor: "white", borderRadius: "8px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}>
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: "15px" }}>
+              <label htmlFor="name" style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Nama:</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                style={{ width: "100%", padding: "10px", border: "1px solid #ccc", borderRadius: "4px" }}
+              />
+            </div>
+            <div style={{ marginBottom: "15px" }}>
+              <label htmlFor="email" style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                style={{ width: "100%", padding: "10px", border: "1px solid #ccc", borderRadius: "4px" }}
+              />
+            </div>
+            <div style={{ marginBottom: "15px" }}>
+              <label htmlFor="amount" style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>Jumlah (Rp):</label>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                value={formData.amount}
+                onChange={handleChange}
+                required
+                style={{ width: "100%", padding: "10px", border: "1px solid #ccc", borderRadius: "4px" }}
+              />
+            </div>
+            <button
+              type="submit"
+              style={{
+                width: "100%",
+                padding: "10px",
+                backgroundColor: "#6200ea",
+                color: "white",
+                border: "none",
+                borderRadius: "4px",
+                fontSize: "16px",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
+              }}
+              onMouseOver={(e) => (e.target.style.backgroundColor = "#4500b0")}
+              onMouseOut={(e) => (e.target.style.backgroundColor = "#6200ea")}
+            >
+              Bayar Sekarang
+            </button>
+          </form>
+        </main>
+        <footer style={{ textAlign: "center", padding: "10px", backgroundColor: "#6200ea", color: "white" }}>
+          <p>&copy; 2025 FankyX Corp</p>
+        </footer>
+      </body>
+    </html>
   );
 }
