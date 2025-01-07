@@ -1,5 +1,27 @@
 {
-  "rewrites": [
-    { "source": "/", "destination": "/index" }
-  ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "pages/api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "pages/**/*.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_MIDTRANS_CLIENT_KEY": "YOUR_CLIENT_KEY",
+    "MIDTRANS_SERVER_KEY": "YOUR_SERVER_KEY"
+  }
 }
