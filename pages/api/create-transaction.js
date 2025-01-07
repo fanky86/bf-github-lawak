@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
     // Konfigurasi Midtrans
     const snap = new midtransClient.Snap({
-      isProduction: true, // Ganti ke true untuk mode produksi
+      isProduction: false, // Ganti ke true untuk mode produksi
       serverKey: process.env.MIDTRANS_SERVER_KEY, // Gantilah dengan Server Key Anda
     });
 
