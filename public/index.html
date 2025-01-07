@@ -1,35 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Midtrans Payment</title>
-</head>
-<body>
-  <h1>Midtrans Payment Gateway</h1>
-  <button id="pay-button">Pay Now</button>
-
-  <script src="https://app.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
-  <script>
-    document.getElementById('pay-button').addEventListener('click', function () {
-      fetch('/api/charge', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.token) {
-          // Memanggil Snap untuk melakukan pembayaran
-          window.snap.pay(data.token);
-        }
-      })
-      .catch(error => {
-        console.error('Terjadi kesalahan:', error);
-      });
+<script>
+  document.getElementById('pay-button').addEventListener('click', function () {
+    fetch('/api/charge', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.token) {
+        // Memanggil Snap untuk melakukan pembayaran
+        window.snap.pay(data.token);
+      }
+    })
+    .catch(error => {
+      console.error('Terjadi kesalahan:', error);
     });
-  </script>
-</body>
-</html>
+  });
+</script>
