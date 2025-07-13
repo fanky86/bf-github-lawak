@@ -1,110 +1,82 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FANKY B-GITHUB - Brute Force GitHub</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FANKY B‑GITHUB</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
-      line-height: 1.6;
-      padding: 30px;
-    }
-    h1, h2, h3 {
-      color: #58a6ff;
-    }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    code {
-      background-color: #161b22;
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: #d2a8ff;
-    }
-    pre {
-      background-color: #161b22;
-      padding: 10px;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-    .tag {
-      background-color: #238636;
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: white;
-      font-size: 0.8rem;
-    }
-    .warning {
-      background-color: #d29922;
-      padding: 10px;
-      border-radius: 6px;
-      color: black;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
+    body { font-family: sans-serif; padding: 2rem; background: #f6f8fa; color: #24292e; }
+    h1,h2,h3 { color: #0366d6; }
+    pre { background: #e1e4e8; padding: 1rem; overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th,td { border: 1px solid #d1d5da; padding: 0.5rem; text-align: left; }
+    .warning { background: #ffd33d; padding: 1rem; margin-bottom: 1rem; border-left: 4px solid #f66a0a; }
   </style>
 </head>
 <body>
 
-  <h1>🔐 FANKY B-GITHUB</h1>
-  <p><span class="tag">Python 3.x</span> &nbsp; <span class="tag">CLI Tool</span> &nbsp; <span class="tag">Brute Force</span></p>
+<h1>🔐 FANKY B‑GITHUB</h1>
 
-  <div class="warning">
-    ⚠️ CATATAN: Tools ini masih dalam tahap pengembangan.<br>
-    Jika hasil crack gagal semua atau tidak ada yang berhasil login, itu karena sistem keamanan GitHub saat ini sangat ketat dan hampir tidak bisa dibobol dengan metode ini.
-  </div>
+<div class="warning">
+  ⚠️ <strong>CATATAN:</strong> Tools ini <em>masih dalam tahap pengembangan</em>. Jika crack gagal semua, itu karena <strong>sistem keamanan GitHub saat ini sangat ketat</strong> dan brute-force semakin sulit.
+</div>
 
-  <h2>📌 Deskripsi</h2>
-  <p>FANKY B-GITHUB adalah tool berbasis Python untuk mencoba brute-force login akun GitHub berdasarkan daftar followers atau following dari target. Program ini menggabungkan scraping HTML, random password generator, dan eksekusi paralel multi-threading.</p>
+<h2>📌 Deskripsi</h2>
+<p>Script Python untuk mencoba brute-force login akun GitHub dari daftar <em>followers</em> atau <em>following</em> target. Sangat berguna untuk edukasi dan riset keamanan.</p>
 
-  <h2>✨ Fitur</h2>
-  <ul>
-    <li>Ambil <code>followers</code> atau <code>following</code> dari target GitHub.</li>
-    <li>Password otomatis berdasarkan nama depan dan variasi angka.</li>
-    <li>Penggunaan <code>user-agent</code> acak mirip browser asli.</li>
-    <li>Deteksi 2FA (checkpoint).</li>
-    <li>Delay otomatis jika kena spam atau block sementara dari GitHub.</li>
-    <li>Multi-threaded dengan ProgressBar dari <code>rich</code>.</li>
-  </ul>
+<h2>✨ Fitur</h2>
+<ul>
+  <li>Scrape followers/following akun target</li>
+  <li>Generator password otomatis (nama depan + kombinasi angka)</li>
+  <li>Random <code>User‑Agent</code> dan header ala browser</li>
+  <li>Multi-threaded (30 thread) dengan progress bar interaktif</li>
+  <li>Deteksi 2FA (Checkpoint)</li>
+  <li>Delay otomatis jika ada blok/spam (10 detik)</li>
+  <li>Menyimpan output ke <code>OK.txt</code> & <code>CP.txt</code></li>
+</ul>
 
-  <h2>🧩 Dependency</h2>
-  <pre><code>pip install requests rich</code></pre>
+<h2>🧩 Instalasi</h2>
+<pre><code>pip install requests rich</code></pre>
 
-  <h2>⚙️ Cara Penggunaan</h2>
-  <pre><code>python3 script.py</code></pre>
-  <p>Kamu akan diminta input username target GitHub, memilih followers/following, dan opsi brute semua atau akun tertentu.</p>
-
-  <h3>Contoh:</h3>
-  <pre><code>
+<h2>⚙️ Penggunaan</h2>
+<pre><code>python3 script.py</code></pre>
+<p>Lalu ikuti prompt selanjutnya:</p>
+<pre><code>
 👤 Target GitHub: torvalds
+1. Followers
+2. Following
 📌 Pilih 1 atau 2: 1
-📋 Total akun ditemukan: 132
+📋 Total akun ditemukan: ...
 📌 Pilih mode (1/2): 1
-  </code></pre>
+</code></pre>
 
-  <h2>📁 Struktur Output</h2>
-  <ul>
-    <li><code>OK.txt</code> - Berisi akun yang berhasil login.</li>
-    <li><code>CP.txt</code> - Berisi akun yang terkena 2FA atau checkpoint.</li>
-  </ul>
+<h2>📁 Output</h2>
+<table>
+  <tr><th>File</th><th>Keterangan</th></tr>
+  <tr><td><code>OK.txt</code></td><td>Akun berhasil login</td></tr>
+  <tr><td><code>CP.txt</code></td><td>Akun kena Checkpoint (2FA)</td></tr>
+</table>
 
-  <h2>🛑 Disclaimer</h2>
-  <p>
-    Tool ini dibuat untuk tujuan edukasi dan riset keamanan. Penggunaan terhadap akun tanpa izin adalah tindakan ilegal. 
-    <strong>Segala penyalahgunaan bukan tanggung jawab pembuat.</strong>
-  </p>
+<h2>📜 Catatan</h2>
+<ul>
+  <li>GitHub sangat membatasi brute-force — hasilnya tidak selalu berhasil.</li>
+  <li>Gunakan untuk belajar dan testing akun milik sendiri.</li>
+  <li>Script hanya mencatat sukses/CP; gagal tidak disimpan.</li>
+</ul>
 
-  <h2>👨‍💻 Developer</h2>
-  <ul>
-    <li><strong>Nama:</strong> Fanky</li>
-    <li><strong>Alias:</strong> Garuda Phantom</li>
-    <li><strong>Github:</strong> <a href="https://github.com/fanky86" target="_blank">github.com/fanky86</a></li>
-    <li><strong>Website:</strong> <a href="https://fankyxd.xyz" target="_blank">https://fankyxd.xyz</a></li>
-  </ul>
+<h2>🛑 Disclaimer</h2>
+<p>Tool ini hanya untuk **pembelajaran & riset keamanan pribadi**. Jangan gunakan untuk login akun orang lain tanpa izin—itu ilegal. Penulis tidak bertanggung jawab atas penyalahgunaan.</p>
+
+<h2>👨‍💻 Developer</h2>
+<ul>
+  <li>Nama: Fanky (Garuda Phantom)</li>
+  <li>GitHub: <a href="https://github.com/fanky86">fanky86</a></li>
+  <li>Website: <a href="https://fankyxd.xyz">fankyxd.xyz</a></li>
+  <li>Email: radenmanis123@gmail.com</li>
+</ul>
+
+<hr>
+<p>⭐ Kalau suka, kasih Star. Fork project ini untuk bantu kembangkan! 💪</p>
 
 </body>
 </html>
